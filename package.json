@@ -3,16 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-scripts": "1.1.4",
     "classnames": "^2.2.5",
+    "node-sass": "^4.7.2",
     "prop-types": "^15.6.1",
-    "recompose": "^0.26.0",
-    "sass-loader": "^6.0.6",
+    "pusher-js": "^4.2.2",
+    "react": "^16.3.1",
     "react-app-rewire-css-modules": "github:codebandits/react-app-rewire-css-modules",
     "react-app-rewired": "^1.4.1",
-    "node-sass": "^4.7.2"
+    "react-dom": "^16.3.1",
+    "react-scripts": "1.1.4",
+    "recompose": "^0.26.0",
+    "sass-loader": "^6.0.6",
+    "material-ui": "^1.0.0-beta.38",
+    "redux": "^3.7.2",
+    "react-redux": "^5.0.7",
+    "redux-thunk": "^2.2.0",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-app-rewired start",
