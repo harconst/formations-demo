@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
+import compose from 'recompose/compose';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import Paper from 'material-ui/Paper';
+import Snackbar from 'material-ui/Snackbar';
 import Grid from 'material-ui/Grid';
+import Slide from 'material-ui/transitions/Slide';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-import scss from './apps.module.scss';
+import scss from './app.module.scss';
+
+import { setSnackbarOpen } from './actions/layout.actions';
 
 import Formations from './containers/formations/formations.component';
 import configuredTheme from './config';
 
-class App extends Component {
-  componentDidMount() {
-  }
+const materialTheme = createMuiTheme(configuredTheme);
 
-  componentWillUnmount() {
-  }
+class App extends Component {
+  transitionUp = props => (<Slide direction="up" {...props} />);
 
   render() {
-    const materialTheme = createMuiTheme(configuredTheme);
+    const { layoutState } = this.props;
 
     return (
       <MuiThemeProvider theme={materialTheme}>
@@ -45,9 +49,30 @@ class App extends Component {
             </Toolbar>
           </AppBar>
         </div>
+        <Snackbar
+          open={layoutState.snackbarOpen}
+          onClose={() => this.props.setSnackbarOpen(false)}
+          transition={this.transitionUp}
+          autoHideDuration={4000}
+          SnackbarContentProps={{
+            'aria-describedby': 'message-id'
+          }}
+          message={<span id="message-id">{layoutState.message}</span>}
+        />
       </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  setSnackbarOpen: PropTypes.func.isRequired,
+  layoutState: PropTypes.shape({}).isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    layoutState: state.layoutState
+  };
+}
+
+export default compose(connect(mapStateToProps, { setSnackbarOpen }))(App);
