@@ -1,5 +1,6 @@
 .football-field {
   display: grid;
+  height: 100%;
   grid-auto-flow: row;
   grid-gap: 10px;
   grid-template-rows: repeat(4, 1fr);
@@ -46,4 +47,8 @@
   img:hover {
     cursor: pointer;
   }
+}
+
+.full-height {
+  height: 100%;
 }

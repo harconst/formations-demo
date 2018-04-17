@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography';
 import Snackbar from 'material-ui/Snackbar';
 import Grid from 'material-ui/Grid';
 import Slide from 'material-ui/transitions/Slide';
+import Hidden from 'material-ui/Hidden';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import scss from './app.module.scss';
@@ -16,6 +17,7 @@ import scss from './app.module.scss';
 import { setSnackbarOpen } from './actions/layout.actions';
 
 import Formations from './containers/formations/formations.component';
+import PlayerList from './containers/player-list/player-list.component';
 import configuredTheme from './config';
 
 const materialTheme = createMuiTheme(configuredTheme);
@@ -24,7 +26,7 @@ class App extends Component {
   transitionUp = props => (<Slide direction="up" {...props} />);
 
   render() {
-    const { layoutState } = this.props;
+    const { layoutState, formationsState } = this.props;
 
     return (
       <MuiThemeProvider theme={materialTheme}>
@@ -36,11 +38,16 @@ class App extends Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          <Grid container alignItems="center" justify="center" className={scss['content-container-wrapper']}>
-            <Grid item xs={12} sm={10} md={8} lg={6} className={scss['content-container']}>
-              <Formations />
-            </Grid>
-          </Grid>
+          <div className={scss['layout-container']}>
+            <PlayerList players={formationsState.players} team={formationsState.team} formation={formationsState.formation} />
+            <Hidden only="xs">
+              <Grid container alignItems="center" justify="center" className={scss['content-container-wrapper']}>
+                <Grid item xs={12} className={scss['content-container']}>
+                  <Formations />
+                </Grid>
+              </Grid>
+            </Hidden>
+          </div>
           <AppBar color="default" position="static">
             <Toolbar>
               <Typography variant="title" color="inherit" noWrap>
@@ -66,12 +73,14 @@ class App extends Component {
 
 App.propTypes = {
   setSnackbarOpen: PropTypes.func.isRequired,
-  layoutState: PropTypes.shape({}).isRequired
+  layoutState: PropTypes.shape({}).isRequired,
+  formationsState: PropTypes.shape({}).isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    layoutState: state.layoutState
+    layoutState: state.layoutState,
+    formationsState: state.formationsState
   };
 }
 

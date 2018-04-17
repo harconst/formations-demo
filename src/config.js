@@ -7,6 +7,9 @@ const configuredTheme = {
     fontFamily: 'Barlow',
     fontSize: 14,
     subheading: {
+      fontSize: '14px'
+    },
+    body2: {
       fontSize: '14px',
       color: '#ffffff'
     }

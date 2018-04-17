@@ -14,3 +14,11 @@ html, body, #root {
 body {
   font-family: 'Barlow', sans-serif;
 }
+
+.util-hide-scrollbars {
+  -ms-overflow-style: none;
+}
+
+.util-hide-scrollbars::-webkit-scrollbar {
+  width: 0;
+}
