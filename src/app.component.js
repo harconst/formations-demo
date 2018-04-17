@@ -7,7 +7,7 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-import scss from './app.module.scss';
+import scss from './apps.module.scss';
 
 import Formations from './containers/formations/formations.component';
 import configuredTheme from './config';
@@ -34,9 +34,7 @@ class App extends Component {
           </AppBar>
           <Grid container alignItems="center" justify="center" className={scss['content-container-wrapper']}>
             <Grid item xs={12} sm={10} md={8} lg={6} className={scss['content-container']}>
-
-                <Formations />
-
+              <Formations />
             </Grid>
           </Grid>
           <AppBar color="default" position="static">

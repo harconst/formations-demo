@@ -18,7 +18,6 @@ const initialState = {
   formation: null,
   players: [],
   team: null,
-  message: null,
   isFetchingFormations: false
 };
 
@@ -40,7 +39,7 @@ export default function postsUpdate(state = initialState, { type, payload }) {
     const orderedPlayers = [...payload.players].sort((a, b) =>
       formationPriorities[formation][a.formation_place] - formationPriorities[formation][b.formation_place]);
 
-    return { ...state, formation: payload.formation, players: orderedPlayers, message: 'Lineup Updated' };
+    return { ...state, formation: payload.formation, players: orderedPlayers };
   }
   default:
     return state;
