@@ -2,6 +2,48 @@
   display: grid;
   grid-auto-flow: row;
   grid-gap: 10px;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(4, 1fr);
+  & > .football-player:nth-child(1) {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+}
+
+.grid-442 {
+  & > .football-player:nth-child(10) {
+    grid-column-start: 2;
+  }
+}
+
+.grid-4411 {
+  & > .football-player:nth-child(10), & > .football-player:nth-child(11) {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+}
+
+.grid-3421 {
+  & > .football-player:nth-child(3) {
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+  & > .football-player:nth-child(9) {
+    grid-column-start: 2;
+  }
+  & > .football-player:nth-child(11) {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+}
+
+.football-player {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  img:hover {
+    cursor: pointer;
+  }
 }

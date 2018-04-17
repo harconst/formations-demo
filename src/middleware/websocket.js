@@ -8,6 +8,8 @@ import {
 let websocket;
 let channel;
 // open the websocket as a side effect of successful rest api call.
+// Hooked on purpose on the rest success action in order to use the socket
+// strictly for updates after the initial data fetch.
 const middleware = store => next => (action) => {
   switch (action.type) {
   case FETCHING_FORMATIONS_REST_SUCCESS:

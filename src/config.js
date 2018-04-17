@@ -7,24 +7,14 @@ const configuredTheme = {
     fontFamily: 'Barlow',
     fontSize: 14,
     subheading: {
-      fontSize: '14px'
+      fontSize: '14px',
+      color: '#ffffff'
     }
   },
   palette: {
     type: 'light',
     primary: lightBlue,
     secondary: pink
-  },
-  status: {
-    danger: 'orange'
-  },
-  overrides: {
-    MuiAppBar: {
-      colorDefault: {
-        backgroundColor: '#FFF',
-        color: '#000'
-      }
-    }
   }
 };
 
