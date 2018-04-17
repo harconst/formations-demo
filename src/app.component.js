@@ -15,6 +15,7 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import scss from './app.module.scss';
 
 import { setSnackbarOpen } from './actions/layout.actions';
+import { fetchTeamFormations } from './actions/formations.actions';
 
 import Formations from './containers/formations/formations.component';
 import PlayerList from './containers/player-list/player-list.component';
@@ -23,6 +24,10 @@ import configuredTheme from './config';
 const materialTheme = createMuiTheme(configuredTheme);
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchTeamFormations();
+  }
+
   transitionUp = props => (<Slide direction="up" {...props} />);
 
   render() {
@@ -39,14 +44,16 @@ class App extends Component {
             </Toolbar>
           </AppBar>
           <div className={scss['layout-container']}>
-            <PlayerList players={formationsState.players} team={formationsState.team} formation={formationsState.formation} />
-            <Hidden only="xs">
-              <Grid container alignItems="center" justify="center" className={scss['content-container-wrapper']}>
-                <Grid item xs={12} className={scss['content-container']}>
-                  <Formations />
+            {formationsState.players && formationsState.players.length && ([
+              <PlayerList key={1} players={formationsState.players} team={formationsState.team} formation={formationsState.formation} />,
+              <Hidden only="xs" key={2}>
+                <Grid container alignItems="center" justify="center" className={scss['content-container-wrapper']}>
+                  <Grid item xs={12} className={scss['content-container']}>
+                    <Formations formation={formationsState.formation} players={formationsState.players} />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Hidden>
+              </Hidden>
+            ])}
           </div>
           <AppBar color="default" position="static">
             <Toolbar>
@@ -73,6 +80,7 @@ class App extends Component {
 
 App.propTypes = {
   setSnackbarOpen: PropTypes.func.isRequired,
+  fetchTeamFormations: PropTypes.func.isRequired,
   layoutState: PropTypes.shape({}).isRequired,
   formationsState: PropTypes.shape({}).isRequired
 };
@@ -84,4 +92,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default compose(connect(mapStateToProps, { setSnackbarOpen }))(App);
+export default compose(connect(mapStateToProps, { setSnackbarOpen, fetchTeamFormations }))(App);
