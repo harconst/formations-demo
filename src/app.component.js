@@ -37,34 +37,40 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={materialTheme}>
-        <div className={scss['app-container']}>
-          <AppBar color="default" position="static">
-            <Toolbar>
-              <Typography variant="title" color="inherit" noWrap>
-                Rush Formations Demo
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <div className={scss['layout-container']}>
-            {formationsState.players && formationsState.players.length && ([
-              <PlayerList key={1} players={formationsState.players} team={formationsState.team} formation={formationsState.formation} />,
-              <Hidden only="xs" key={2}>
-                <Grid container alignItems="center" justify="center" className={scss['content-container-wrapper']}>
-                  <Grid item xs={12} className={scss['content-container']}>
-                    <Formations formation={formationsState.formation} players={formationsState.players} />
-                  </Grid>
-                </Grid>
-              </Hidden>
-            ])}
-            {formationsState.isFetchingFormations && <LayoutLoader />}
-          </div>
-          <AppBar color="default" position="static">
-            <Toolbar>
-              <Typography variant="title" color="inherit" noWrap>
-                <small>&copy; 2018 harconst</small>
-              </Typography>
-            </Toolbar>
-          </AppBar>
+        <div className={scss['app-wrapper']}>
+          <main className={scss['app-main']}>
+            <AppBar color="default" position="static">
+              <Toolbar>
+                <Typography variant="title" color="inherit" noWrap>
+                  Rush Formations Demo
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <div className={scss['layout-content-wrapper']}>
+              <div className={scss['layout-content']}>
+                <div className={scss['content-frame']}>
+                  {formationsState.players && formationsState.players.length && ([
+                    <PlayerList key={1} players={formationsState.players} team={formationsState.team} formation={formationsState.formation} />,
+                    <Hidden only="xs" key={2}>
+                      <Grid container alignItems="center" justify="center" className={scss['grid-container']}>
+                        <Grid item xs={12} className={scss['grid-content']}>
+                          <Formations formation={formationsState.formation} players={formationsState.players} />
+                        </Grid>
+                      </Grid>
+                    </Hidden>
+                  ])}
+                  {formationsState.isFetchingFormations && <LayoutLoader />}
+                </div>
+              </div>
+            </div>
+            <AppBar color="default" position="static">
+              <Toolbar>
+                <Typography variant="title" color="inherit" noWrap>
+                  <small>&copy; 2018 harconst</small>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+          </main>
         </div>
         <Snackbar
           open={layoutState.snackbarOpen}
