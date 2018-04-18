@@ -17,6 +17,8 @@ import scss from './app.module.scss';
 import { setSnackbarOpen } from './actions/layout.actions';
 import { fetchTeamFormations } from './actions/formations.actions';
 
+import LayoutLoader from './components/layout-loader/layout-loader.component';
+
 import Formations from './containers/formations/formations.component';
 import PlayerList from './containers/player-list/player-list.component';
 import configuredTheme from './config';
@@ -54,6 +56,7 @@ class App extends Component {
                 </Grid>
               </Hidden>
             ])}
+            {formationsState.isFetchingFormations && <LayoutLoader />}
           </div>
           <AppBar color="default" position="static">
             <Toolbar>
